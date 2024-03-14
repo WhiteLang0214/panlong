@@ -1,24 +1,36 @@
 // .18版本 写法 对象形式
-import React, { lazy } from "react";
-import Home from "../views/Home";
+import { lazy } from "react";
 import { Navigate } from "react-router-dom";
-import WithLoadingComponent from '@/components/PGLoading';
+import Login from "../views/Login";
+import Layout from "../views/Layout";
+import WithLoadingComponent from "@/components/PGLoading";
 
-const About = lazy(() => import("../views/About"));
+const Page1 = lazy(() => import("../views/Page1"));
+const Page2 = lazy(() => import("../views/Page2"));
 
 const routes = [
   {
     path: "/",
-    element: <Navigate to="/home" />,
+    element: <Navigate to="/page1" />,
   },
   {
-    path: "/home",
-    element: <Home />,
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/page1",
+        element: WithLoadingComponent(<Page1 />),
+      },
+      {
+        path: "/page2",
+        element: WithLoadingComponent(<Page2 />),
+      },
+    ],
   },
   {
-    path: "/about",
-    element: WithLoadingComponent(<About />),
-  },
+    path: "/login",
+    element: <Login />,
+  }
 ];
 
 // react-dom.development.js:19055 Uncaught Error: A component suspended while responding to synchronous input. This will cause the UI to be replaced with a loading indicator. To fix, updates that suspend should be wrapped with startTransition.

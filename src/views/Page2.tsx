@@ -1,6 +1,6 @@
 const view = () => {
   return(
-    <div>home页面</div>
+    <div>Page2页面</div>
   )
 }
 
